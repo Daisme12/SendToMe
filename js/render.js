@@ -65,7 +65,7 @@ function syncProfileUI(elements, profileName) {
   elements.profileName.value = name;
   elements.senderName.value = name;
   elements.profileBadge.textContent = name.charAt(0).toUpperCase();
-  const shareUrl = new URL("./friends.html", window.location.href);
+  const shareUrl = new URL("./index.html", window.location.href);
   shareUrl.searchParams.set("to", name);
   elements.shareLink.value = shareUrl.toString();
   elements.shareLinkOpen.href = shareUrl.toString();

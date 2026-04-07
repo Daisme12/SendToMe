@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send A Letter</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="admin-page">
+  <main class="app-shell">
+    <section class="hero">
+      <article class="hero-card">
+        <div class="eyebrow">Send A Letter</div>
+        <h1>Gửi lời nhắn và thử thách cho nhóm bạn.</h1>
+        <p>
+          Ứng dụng nhỏ để gửi note, nhận thử thách, chấp nhận nhiệm vụ thú vị và ghim lại những việc bạn muốn theo dõi.
+        </p>
+        <div class="hero-stats" id="hero-stats">
+          <div class="stat">
+            <strong id="stat-pending">0</strong>
+            <span>Đang chờ trong Tôi</span>
+          </div>
+          <div class="stat">
+            <strong id="stat-accepted">0</strong>
+            <span>Đã chấp nhận</span>
+          </div>
+          <div class="stat">
+            <strong id="stat-pinned">0</strong>
+            <span>Đang được ghim</span>
+          </div>
+        </div>
+      </article>
+
+      <aside class="profile-card">
+        <div>
+          <div class="profile-badge" id="profile-badge">L</div>
+          <h2 style="margin-top: 16px;">Hồ sơ hiện tại</h2>
+          <p class="panel-subtitle">Tên này dùng để lọc thư bạn nhận trong tab Tôi và Tổng hợp.</p>
+        </div>
+        <div class="field">
+          <label for="profile-name">Tên của bạn</label>
+          <input id="profile-name" type="text" placeholder="Ví dụ: Linh">
+        </div>
+        <div class="field">
+          <label for="share-link">Link cho bạn bè gửi đến bạn</label>
+          <input id="share-link" type="text" readonly>
+        </div>
+        <div class="button-row">
+          <button class="btn btn-primary" id="save-profile" type="button">Lưu hồ sơ</button>
+          <button class="btn btn-secondary" id="seed-demo" type="button">Nạp dữ liệu mẫu</button>
+        </div>
+        <a class="btn btn-ghost" id="share-link-open" href="./index.html">Mở trang cho bạn bè gửi</a>
+      </aside>
+    </section>
+
+    <nav class="tabs" aria-label="Điều hướng chính">
+      <button class="tab-button active" data-tab-target="friends-tab" type="button">Bạn bè</button>
+      <button class="tab-button" data-tab-target="me-tab" type="button">Gửi Đến Tôi</button>
+      <button class="tab-button" data-tab-target="summary-tab" type="button">Tổng hợp</button>
+    </nav>
+
+    <section class="tab-panel active" id="friends-tab">
+      <div class="content-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Tạo ghi chú hoặc thử thách</h2>
+              <p class="panel-subtitle">Nhập nội dung, chọn người nhận và bấm Gửi để lưu lại.</p>
+            </div>
+          </div>
+
+          <form id="note-form" class="stack">
+            <div class="form-grid">
+              <div class="field">
+                <label for="sender-name">Người gửi</label>
+                <input id="sender-name" type="text" placeholder="Tên của bạn">
+              </div>
+              <div class="field">
+                <label for="recipient-name">Người nhận</label>
+                <input id="recipient-name" type="text" placeholder="Tên bạn bè">
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="message-type">Loại nội dung</label>
+                <select id="message-type">
+                  <option value="note">Lời nhắn</option>
+                  <option value="challenge">Thử thách</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="message-title">Tiêu đề ngắn</label>
+                <input id="message-title" type="text" placeholder="Ví dụ: Mini challenge cuối tuần">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message-content">Nội dung</label>
+              <textarea id="message-content" placeholder="Viết lời nhắn hoặc thử thách tại đây..."></textarea>
+            </div>
+
+            <div class="button-row">
+              <button class="btn btn-primary" type="submit">Gửi</button>
+              <button class="btn btn-ghost" type="reset">Làm mới</button>
+            </div>
+          </form>
+        </article>
+
+        <aside class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Đã gửi gần đây</h2>
+              <p class="panel-subtitle">Danh sách lời nhắn và thử thách bạn vừa tạo.</p>
+            </div>
+          </div>
+          <div class="list" id="sent-list"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="me-tab">
+      <div class="content-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Hộp thư của tôi</h2>
+              <p class="panel-subtitle">Chọn chấp nhận để đưa thử thách sang Tổng hợp và tự động ghim lên bảng.</p>
+            </div>
+            <button class="btn btn-secondary" id="refresh-inbox" type="button">Làm mới</button>
+          </div>
+          <div class="list" id="inbox-list"></div>
+        </article>
+
+        <aside class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Ghi chú nhanh</h2>
+              <p class="panel-subtitle">Những thử thách đã chấp nhận gần đây của bạn.</p>
+            </div>
+          </div>
+          <div class="list" id="accepted-preview"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="summary-tab">
+      <div class="content-grid">
+        <article class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Tổng hợp thử thách đã chấp nhận</h2>
+              <p class="panel-subtitle">Bạn có thể bỏ ghim hoặc xóa hẳn nếu không muốn giữ nữa.</p>
+            </div>
+          </div>
+          <div class="list" id="accepted-list"></div>
+        </article>
+
+        <aside class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Bảng ghi chú</h2>
+              <p class="panel-subtitle">Các thử thách được ghim để dễ theo dõi mỗi ngày.</p>
+            </div>
+          </div>
+          <div class="board" id="pin-board"></div>
+        </aside>
+      </div>
+    </section>
+
+    <p class="footer-note">Dữ liệu hiện được lưu trên Firebase Firestore để đồng bộ giữa các thiết bị và trang gửi của bạn bè.</p>
+  </main>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

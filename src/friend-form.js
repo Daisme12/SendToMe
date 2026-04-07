@@ -5,12 +5,23 @@ const elements = {
   noteTemplate: document.getElementById("friend-note-template"),
   addNoteButton: document.getElementById("friend-add-note"),
   popupBackdrop: document.getElementById("friend-popup-backdrop"),
+  popupTitle: document.getElementById("friend-popup-title"),
   popupText: document.getElementById("friend-popup-text"),
   popupClose: document.getElementById("friend-popup-close"),
   popupAction: document.getElementById("friend-popup-action"),
   adminImage: document.getElementById("friend-admin-image")
 };
 let popupTimer = null;
+
+function showPopup(title, message) {
+  elements.popupTitle.textContent = title;
+  elements.popupText.textContent = message;
+  elements.popupBackdrop.hidden = false;
+  window.clearTimeout(popupTimer);
+  popupTimer = window.setTimeout(() => {
+    hideThankYou();
+  }, 3000);
+}
 
 function getPresetRecipient() {
   const params = new URLSearchParams(window.location.search);
@@ -24,12 +35,7 @@ function getAdminImageFromQuery() {
 
 function showThankYou(sender, recipient, type) {
   const messageLabel = type === "challenge" ? "thử thách" : "lời nhắn";
-  elements.popupText.textContent = `Cảm ơn ${sender}. ${messageLabel} của bạn đã được gửi tới ${recipient}.`;
-  elements.popupBackdrop.hidden = false;
-  window.clearTimeout(popupTimer);
-  popupTimer = window.setTimeout(() => {
-    hideThankYou();
-  }, 3000);
+  showPopup("Cảm ơn bạn", `${messageLabel} của ${sender} đã được gửi tới ${recipient}.`);
 }
 
 function hideThankYou() {
@@ -125,6 +131,8 @@ function createExtraSheet() {
   updateDynamicSheetStyle(sheet);
   bindSheetEvents(sheet);
   elements.noteGrid.appendChild(fragment);
+  showPopup("Đã thêm ghi chú mới", "Một tờ note mới đã được tạo. Bạn có thể viết tiếp trên đó.");
+  sheet.querySelector(".friend-input-sender")?.focus();
 }
 
 function bindPopupEvents() {
