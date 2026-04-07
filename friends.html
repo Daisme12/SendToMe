@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gửi lời nhắn cho bạn</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="friend-page">
+  <div class="heart-rain" aria-hidden="true">
+    <span class="heart heart-1">❤</span>
+    <span class="heart heart-2">❤</span>
+    <span class="heart heart-3">❤</span>
+    <span class="heart heart-4">❤</span>
+    <span class="heart heart-5">❤</span>
+    <span class="heart heart-6">❤</span>
+    <span class="heart heart-7">❤</span>
+    <span class="heart heart-8">❤</span>
+    <span class="heart heart-9">❤</span>
+    <span class="heart heart-10">❤</span>
+  </div>
+
+  <main class="app-shell app-shell-narrow friend-shell">
+    <section class="hero friend-hero">
+      <article class="hero-card friend-hero-card">
+        <div class="friend-hero-copy">
+          <div class="eyebrow">Send To Me</div>
+          <h1>Hãy viết một điều mà bạn muốn tôi làm trước tuổi 25.</h1>
+        </div>
+
+        <div class="friend-hero-media">
+          <img
+            id="friend-admin-image"
+            class="friend-admin-image"
+            src="./image/ngoc.jpeg"
+          >
+        </div>
+      </article>
+    </section>
+
+    <section class="friend-board-shell">
+      <div class="friend-board-head">
+        <div>
+          <h2>Tờ giấy gửi đến mình</h2>
+          <p class="panel-subtitle">Mỗi tờ note là một tin nhắn riêng. Gửi từng tờ một để lời nhắn không bị lẫn.</p>
+        </div>
+        <button class="friend-add-note" id="friend-add-note" type="button" aria-label="Thêm tờ note">+</button>
+      </div>
+
+      <div class="friend-note-grid" id="friend-note-grid">
+        <form class="friend-note-sheet friend-note-sheet-message" data-sheet-type="note">
+          <button class="friend-remove-note" type="button" aria-label="Xóa tờ note">×</button>
+          <div class="friend-note-pin"></div>
+          <div class="friend-sheet-head">
+            <div>
+              <span class="friend-sheet-label">Lời nhắn</span>
+              <h3>Viết một lời nhắn</h3>
+            </div>
+          </div>
+
+          <div class="stack">
+            <div class="field">
+              <label>Tên của bạn</label>
+              <input class="friend-input-sender" type="text" placeholder="Để trống nếu muốn ẩn danh">
+            </div>
+            <div class="field">
+              <label>Gửi đến</label>
+              <input class="friend-input-recipient" type="text" placeholder="Ví dụ: Linh">
+            </div>
+            <div class="field">
+              <label>Tiêu đề</label>
+              <input class="friend-input-title" type="text" placeholder="Ví dụ: Một điều mình muốn nói">
+            </div>
+            <div class="field">
+              <label>Nội dung</label>
+              <textarea class="friend-input-content" placeholder="Viết lời nhắn của bạn ở đây..."></textarea>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-primary" type="submit">Gửi lời nhắn</button>
+          </div>
+        </form>
+
+        <form class="friend-note-sheet friend-note-sheet-challenge" data-sheet-type="challenge">
+          <button class="friend-remove-note" type="button" aria-label="Xóa tờ note">×</button>
+          <div class="friend-note-pin"></div>
+          <div class="friend-sheet-head">
+            <div>
+              <span class="friend-sheet-label">Thử thách</span>
+              <h3>Tạo một thử thách</h3>
+            </div>
+          </div>
+
+          <div class="stack">
+            <div class="field">
+              <label>Tên của bạn</label>
+              <input class="friend-input-sender" type="text" placeholder="Để trống nếu muốn ẩn danh">
+            </div>
+            <div class="field">
+              <label>Gửi đến</label>
+              <input class="friend-input-recipient" type="text" placeholder="Ví dụ: Linh">
+            </div>
+            <div class="field">
+              <label>Tiêu đề</label>
+              <input class="friend-input-title" type="text" placeholder="Ví dụ: Thử làm điều này hôm nay">
+            </div>
+            <div class="field">
+              <label>Nội dung</label>
+              <textarea class="friend-input-content" placeholder="Viết thử thách của bạn ở đây..."></textarea>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-primary" type="submit">Gửi thử thách</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <template id="friend-note-template">
+    <form class="friend-note-sheet friend-note-sheet-extra" data-sheet-type="note">
+      <button class="friend-remove-note" type="button" aria-label="Xóa tờ note">×</button>
+      <div class="friend-note-pin"></div>
+      <div class="friend-sheet-head">
+        <div>
+          <span class="friend-sheet-label">Tờ note mới</span>
+          <h3>Viết thêm một điều nữa</h3>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="field">
+          <label>Loại nội dung</label>
+          <select class="friend-input-type">
+            <option value="note">Lời nhắn</option>
+            <option value="challenge">Thử thách</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tên của bạn</label>
+          <input class="friend-input-sender" type="text" placeholder="Để trống nếu muốn ẩn danh">
+        </div>
+        <div class="field">
+          <label>Gửi đến</label>
+          <input class="friend-input-recipient" type="text" placeholder="Ví dụ: Linh">
+        </div>
+        <div class="field">
+          <label>Tiêu đề</label>
+          <input class="friend-input-title" type="text" placeholder="Ví dụ: Một note khác">
+        </div>
+        <div class="field">
+          <label>Nội dung</label>
+          <textarea class="friend-input-content" placeholder="Viết điều bạn muốn gửi ở đây..."></textarea>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button class="btn btn-primary" type="submit">Gửi note này</button>
+      </div>
+    </form>
+  </template>
+
+  <div class="friend-popup-backdrop" id="friend-popup-backdrop" hidden>
+    <div class="friend-popup" role="dialog" aria-modal="true" aria-labelledby="friend-popup-title">
+      <button class="friend-popup-close" id="friend-popup-close" type="button" aria-label="Đóng">×</button>
+      <div class="friend-popup-badge">❤</div>
+      <h2 id="friend-popup-title">Cảm ơn bạn</h2>
+      <p id="friend-popup-text">Lời nhắn của bạn đã được gửi thành công.</p>
+      <button class="btn btn-primary" id="friend-popup-action" type="button">Đóng</button>
+    </div>
+  </div>
+
+  <script type="module" src="./js/friend-form.js"></script>
+</body>
+</html>
